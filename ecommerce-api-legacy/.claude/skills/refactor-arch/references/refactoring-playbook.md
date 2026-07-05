@@ -116,6 +116,12 @@ def register_error_handlers(app):
         return jsonify({"erro": "Erro interno", "sucesso": False}), 500
 ```
 Controllers ficam limpos: levantam `DomainError("Produto não encontrado", 404)`.
+
+> **Cuidado (Flask):** registre também um handler para `werkzeug.exceptions.HTTPException`
+> **antes** do handler genérico de `Exception`; senão erros de roteamento (404/405)
+> caem no handler de `Exception` e viram 500. Ex:
+> `@app.errorhandler(HTTPException) def _h(e): return jsonify({"erro": e.description}), e.code`
+
 **Express:** `app.use((err, req, res, next) => res.status(err.status||500).json({error: err.message}))`.
 
 ---

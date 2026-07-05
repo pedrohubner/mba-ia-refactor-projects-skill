@@ -6,6 +6,7 @@ que converte erros de domínio e inesperados no formato de resposta padronizado.
 import logging
 
 from flask import jsonify
+from werkzeug.exceptions import HTTPException
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +24,10 @@ def register_error_handlers(app):
     def _handle_domain(error):
         return jsonify({"erro": str(error), "sucesso": False}), error.status
 
-    @app.errorhandler(404)
-    def _handle_not_found(error):
-        return jsonify({"erro": "Recurso não encontrado", "sucesso": False}), 404
+    @app.errorhandler(HTTPException)
+    def _handle_http(error):
+        # Preserva o status HTTP correto (404, 405, ...) em vez de virar 500.
+        return jsonify({"erro": error.description, "sucesso": False}), error.code
 
     @app.errorhandler(Exception)
     def _handle_unexpected(error):

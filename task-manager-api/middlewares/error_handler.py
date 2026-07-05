@@ -6,6 +6,7 @@ Substitui os `except:`/`except Exception` genéricos espalhados pelas rotas por 
 import logging
 
 from flask import jsonify
+from werkzeug.exceptions import HTTPException
 
 logger = logging.getLogger(__name__)
 
@@ -23,9 +24,10 @@ def register_error_handlers(app):
     def _handle_domain(error):
         return jsonify({'error': str(error)}), error.status
 
-    @app.errorhandler(404)
-    def _handle_not_found(error):
-        return jsonify({'error': 'Recurso não encontrado'}), 404
+    @app.errorhandler(HTTPException)
+    def _handle_http(error):
+        # Preserva o status HTTP correto (404, 405, ...) em vez de virar 500.
+        return jsonify({'error': error.description}), error.code
 
     @app.errorhandler(Exception)
     def _handle_unexpected(error):

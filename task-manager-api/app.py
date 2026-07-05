@@ -5,7 +5,7 @@ blueprints (View) e o error handler central, e expõe `create_app()`.
 """
 import logging
 
-from flask import jsonify
+from flask import Flask
 from flask_cors import CORS
 
 from config.settings import settings
@@ -19,7 +19,6 @@ from utils.helpers import now_utc
 
 def create_app():
     logging.basicConfig(level=logging.INFO)
-    from flask import Flask
 
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
