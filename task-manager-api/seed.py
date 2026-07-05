@@ -1,3 +1,4 @@
+"""Script para popular o banco com dados iniciais"""
 from app import app, db
 from models.task import Task
 from models.user import User

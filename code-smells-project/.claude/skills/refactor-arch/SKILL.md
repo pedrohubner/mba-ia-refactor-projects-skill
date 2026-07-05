@@ -154,8 +154,10 @@ Validation
 - **Segurança primeiro.** Credenciais hardcoded, SQL Injection e endpoints
   perigosos são sempre CRITICAL e devem ser eliminados.
 - **Comportamento preservado, estrutura transformada.**
-- **Código sem comentários.** O código refatorado não deve conter comentários
-  nem docstrings explicativas — nomes claros e estrutura em camadas já
-  comunicam a intenção. Só mantenha um comentário quando for estritamente
-  necessário (ex.: contornar um bug conhecido de biblioteca). A explicação das
-  correções vive no relatório de auditoria, não no código.
+- **Não adicionar comentários ao código novo.** O código produzido/refatorado
+  não deve receber comentários nem docstrings explicativas — nomes claros e
+  estrutura em camadas já comunicam a intenção. Só inclua um comentário quando
+  for estritamente necessário (ex.: contornar um bug conhecido de biblioteca).
+  A explicação das correções vive no relatório de auditoria, não no código.
+  **Preserve** comentários pré-existentes relevantes do projeto original; não os
+  remova sem necessidade — a regra vale para o código novo que você escreve.
