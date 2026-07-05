@@ -1,6 +1,10 @@
 from database import db
-from datetime import datetime
+from utils.helpers import now_utc
 import hashlib
+import os
+
+_PBKDF2_ROUNDS = 120_000
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -11,28 +15,35 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), default='user')
     active = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=now_utc)
 
     def to_dict(self):
+        # NÃO expõe o campo `password` (finding H5 — vazamento de dado sensível).
         return {
             'id': self.id,
             'name': self.name,
             'email': self.email,
-            'password': self.password,
             'role': self.role,
             'active': self.active,
-            'created_at': str(self.created_at)
+            'created_at': str(self.created_at),
         }
 
     def set_password(self, pwd):
-
-        self.password = hashlib.md5(pwd.encode()).hexdigest()
+        # Hash seguro com PBKDF2 + salt (finding C5 — substitui MD5).
+        salt = os.urandom(16)
+        digest = hashlib.pbkdf2_hmac('sha256', pwd.encode(), salt, _PBKDF2_ROUNDS)
+        self.password = f'pbkdf2_sha256${_PBKDF2_ROUNDS}${salt.hex()}${digest.hex()}'
 
     def check_password(self, pwd):
-        return self.password == hashlib.md5(pwd.encode()).hexdigest()
+        try:
+            algo, rounds, salt_hex, hash_hex = self.password.split('$')
+            if algo != 'pbkdf2_sha256':
+                return False
+            salt = bytes.fromhex(salt_hex)
+            calc = hashlib.pbkdf2_hmac('sha256', pwd.encode(), salt, int(rounds))
+            return calc.hex() == hash_hex
+        except (ValueError, AttributeError):
+            return False
 
     def is_admin(self):
-        if self.role == 'admin':
-            return True
-        else:
-            return False
+        return self.role == 'admin'
