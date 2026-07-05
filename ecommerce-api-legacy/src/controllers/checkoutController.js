@@ -1,5 +1,3 @@
-// Controller de checkout — fino: extrai o body, chama o service, responde.
-// `next(err)` delega ao error handler central (nenhum try/catch por rota).
 class CheckoutController {
     constructor(checkoutService) {
         this.checkoutService = checkoutService;

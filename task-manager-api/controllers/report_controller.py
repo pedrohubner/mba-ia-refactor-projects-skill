@@ -1,4 +1,3 @@
-"""Controller de relatórios e categorias."""
 from flask import request, jsonify
 
 from services import report_service, category_service

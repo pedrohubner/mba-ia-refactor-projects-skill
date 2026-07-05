@@ -1,10 +1,3 @@
-"""Regra de negócio de tasks (findings H1/M1/M2/M3).
-
-- Serialização centralizada (fim da duplicação do bloco `overdue`).
-- Listagem com eager loading (joinedload) elimina o N+1 que fazia uma query de
-  usuário e outra de categoria por task (playbook P7).
-- `db.session.get(...)` no lugar de `Model.query.get(...)` deprecated (P8).
-"""
 from sqlalchemy.orm import joinedload
 
 from database import db

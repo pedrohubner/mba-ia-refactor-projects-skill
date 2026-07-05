@@ -1,4 +1,3 @@
-"""Controller de health e index. Não vaza segredos (finding C1 corrigido)."""
 from flask import jsonify
 
 

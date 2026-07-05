@@ -1,4 +1,3 @@
-"""View/Routes de relatórios e categorias — delega ao controller."""
 from flask import Blueprint
 
 from controllers import report_controller

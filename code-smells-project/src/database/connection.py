@@ -1,14 +1,7 @@
-"""Factory de conexão + criação de schema e seed.
-
-Substitui o estado global mutável `db_connection` (finding H2) por uma factory
-explícita. A conexão é criada uma vez no composition root e injetada nos models
-(finding H3 — injeção de dependência).
-"""
 import sqlite3
 
 
 def create_connection(db_path):
-    """Cria a conexão, garante o schema e popula seeds idempotentemente."""
     conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     _init_schema(conn)
@@ -93,7 +86,6 @@ def _seed_if_empty(conn):
         produtos,
     )
 
-    # Seed usa hash seguro para as senhas (finding C5 corrigido também na seed).
     from src.models.usuario_model import hash_senha
 
     usuarios = [

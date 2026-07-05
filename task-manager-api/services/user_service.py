@@ -1,4 +1,3 @@
-"""Regra de negócio de usuários (findings H1/M2)."""
 from database import db
 from models.user import User
 from models.task import Task

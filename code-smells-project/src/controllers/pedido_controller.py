@@ -1,4 +1,3 @@
-"""Controller de Pedido — orquestra service de pedido e relatório."""
 from flask import jsonify, request
 
 from src.config.settings import settings

@@ -1,12 +1,3 @@
-"""Helpers puros e reutilizáveis.
-
-- `now_utc()` substitui `datetime.utcnow()` (API deprecated no Python 3.12+) por
-  `datetime.now(timezone.utc)`, mantendo o valor *naive* para permanecer
-  compatível com as colunas naive já persistidas.
-- `is_overdue()` centraliza a lógica de atraso que estava duplicada em várias
-  rotas (findings M3/DRY).
-- Imports não usados do arquivo original foram removidos (finding L4).
-"""
 import re
 from datetime import datetime, timezone
 
@@ -16,7 +7,6 @@ def now_utc():
 
 
 def is_overdue(task):
-    """Uma task está atrasada se venceu e não está concluída/cancelada."""
     return bool(
         task.due_date
         and task.due_date < now_utc()

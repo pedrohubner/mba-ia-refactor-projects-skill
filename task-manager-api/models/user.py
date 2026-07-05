@@ -18,7 +18,6 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=now_utc)
 
     def to_dict(self):
-        # NÃO expõe o campo `password` (finding H5 — vazamento de dado sensível).
         return {
             'id': self.id,
             'name': self.name,
@@ -29,7 +28,6 @@ class User(db.Model):
         }
 
     def set_password(self, pwd):
-        # Hash seguro com PBKDF2 + salt (finding C5 — substitui MD5).
         salt = os.urandom(16)
         digest = hashlib.pbkdf2_hmac('sha256', pwd.encode(), salt, _PBKDF2_ROUNDS)
         self.password = f'pbkdf2_sha256${_PBKDF2_ROUNDS}${salt.hex()}${digest.hex()}'

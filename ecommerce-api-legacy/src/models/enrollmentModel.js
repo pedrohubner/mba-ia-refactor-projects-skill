@@ -1,4 +1,3 @@
-// Model de matrícula.
 class EnrollmentModel {
     constructor(conn) {
         this.conn = conn;

@@ -1,4 +1,3 @@
-"""Controller de usuários."""
 from flask import request, jsonify
 
 from services import user_service

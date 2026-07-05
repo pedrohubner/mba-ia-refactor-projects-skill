@@ -1,6 +1,3 @@
-// Composition root / entry point.
-// Cria o app, lê a config, conecta o banco, instancia models → services →
-// controllers (injeção de dependência), registra rotas e o error handler.
 const express = require('express');
 
 const config = require('./config/settings');
@@ -27,14 +24,12 @@ const UserController = require('./controllers/userController');
 async function createApp() {
     const conn = await createAndInit(config.dbPath);
 
-    // Models
     const userModel = new UserModel(conn);
     const courseModel = new CourseModel(conn);
     const enrollmentModel = new EnrollmentModel(conn);
     const paymentModel = new PaymentModel(conn);
     const auditModel = new AuditModel(conn);
 
-    // Services
     const paymentService = new PaymentService(config.paymentGatewayKey);
     const checkoutService = new CheckoutService({
         userModel, courseModel, enrollmentModel, paymentModel, auditModel, paymentService,
@@ -42,7 +37,6 @@ async function createApp() {
     const reportService = new ReportService({ courseModel, enrollmentModel, userModel, paymentModel });
     const userService = new UserService({ userModel, enrollmentModel, paymentModel });
 
-    // Controllers
     const controllers = {
         checkout: new CheckoutController(checkoutService),
         report: new ReportController(reportService),

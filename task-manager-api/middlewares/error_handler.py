@@ -1,8 +1,3 @@
-"""Tratamento de erro centralizado (findings M4 / playbook P5).
-
-Substitui os `except:`/`except Exception` genéricos espalhados pelas rotas por um
-único ponto que converte erros de domínio e inesperados no formato padronizado.
-"""
 import logging
 
 from flask import jsonify
@@ -12,7 +7,6 @@ logger = logging.getLogger(__name__)
 
 
 class DomainError(Exception):
-    """Erro de regra de negócio com status HTTP associado."""
 
     def __init__(self, message, status=400):
         super().__init__(message)
@@ -26,7 +20,6 @@ def register_error_handlers(app):
 
     @app.errorhandler(HTTPException)
     def _handle_http(error):
-        # Preserva o status HTTP correto (404, 405, ...) em vez de virar 500.
         return jsonify({'error': error.description}), error.code
 
     @app.errorhandler(Exception)

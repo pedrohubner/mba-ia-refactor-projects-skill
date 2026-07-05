@@ -1,4 +1,3 @@
-// Controller do relatório financeiro.
 class ReportController {
     constructor(reportService) {
         this.reportService = reportService;

@@ -1,8 +1,3 @@
-"""Serviço de notificação — isola efeitos colaterais (finding L2).
-
-Substitui os `print("ENVIANDO EMAIL...")` espalhados nos controllers por uma
-dependência única e testável, usando logging estruturado.
-"""
 import logging
 
 logger = logging.getLogger(__name__)

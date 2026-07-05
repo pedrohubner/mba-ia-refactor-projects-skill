@@ -1,4 +1,3 @@
-// Model de pagamento.
 class PaymentModel {
     constructor(conn) {
         this.conn = conn;
@@ -23,7 +22,6 @@ class PaymentModel {
     }
 
     async deleteByUser(userId) {
-        // Remove pagamentos das matrículas do usuário (integridade referencial, M5).
         return this.conn.run(
             `DELETE FROM payments WHERE enrollment_id IN (
                 SELECT id FROM enrollments WHERE user_id = ?

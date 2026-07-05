@@ -1,7 +1,3 @@
-"""Configuração central via variáveis de ambiente (playbook P1).
-
-Elimina o SECRET_KEY hardcoded (finding C1) e centraliza flags/constantes.
-"""
 import os
 
 
@@ -16,7 +12,6 @@ class Settings:
 
 settings = Settings()
 
-# Constantes de domínio centralizadas (elimina magic strings/numbers - L1).
 VALID_STATUSES = ["pending", "in_progress", "done", "cancelled"]
 VALID_ROLES = ["user", "admin", "manager"]
 TITLE_MIN = 3
@@ -24,4 +19,4 @@ TITLE_MAX = 200
 PASSWORD_MIN = 4
 PRIORITY_MIN = 1
 PRIORITY_MAX = 5
-HIGH_PRIORITY_THRESHOLD = 2  # prioridade <= 2 é considerada alta
+HIGH_PRIORITY_THRESHOLD = 2

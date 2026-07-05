@@ -1,5 +1,3 @@
-// Camada View/Routes — mapeia método+caminho → controller. Sem lógica.
-// Mesmos endpoints do original: contrato preservado.
 const express = require('express');
 
 function buildRouter(controllers) {

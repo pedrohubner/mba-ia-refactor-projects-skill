@@ -1,4 +1,3 @@
-// Model de log de auditoria.
 class AuditModel {
     constructor(conn) {
         this.conn = conn;

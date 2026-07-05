@@ -1,4 +1,3 @@
-"""Controller de Usuário — cadastro, listagem e login."""
 from flask import jsonify, request
 
 from src.middlewares.error_handler import DomainError

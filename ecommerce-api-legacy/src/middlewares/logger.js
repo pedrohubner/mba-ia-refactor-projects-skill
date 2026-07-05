@@ -1,4 +1,3 @@
-// Logger simples e centralizado (finding L2 — substitui console.log espalhado).
 function ts() {
     return new Date().toISOString();
 }

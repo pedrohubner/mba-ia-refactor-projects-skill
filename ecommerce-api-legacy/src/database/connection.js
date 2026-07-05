@@ -1,13 +1,9 @@
-// Conexão + schema/seed + helpers promisificados.
-// Substitui os callbacks aninhados do driver sqlite3 (finding H4 / API deprecada)
-// por uma API async/await (playbook P8/P10).
 const sqlite3 = require('sqlite3').verbose();
 const { promisify } = require('util');
 
 function createDatabase(dbPath) {
     const db = new sqlite3.Database(dbPath);
 
-    // `db.run` usa `this.lastID`, então não pode ser um arrow promisify simples:
     const run = (sql, params = []) =>
         new Promise((resolve, reject) => {
             db.run(sql, params, function (err) {

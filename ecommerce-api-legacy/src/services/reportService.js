@@ -1,7 +1,3 @@
-// Relatório financeiro. Reescrito com async/await + agregação em memória,
-// eliminando o "callback hell" com contadores manuais de pendências (finding H4)
-// e a explosão de queries N+1 (finding M1 / playbook P7): agora são 4 queries
-// no total, independentemente do número de cursos/matrículas.
 class ReportService {
     constructor({ courseModel, enrollmentModel, userModel, paymentModel }) {
         this.courseModel = courseModel;

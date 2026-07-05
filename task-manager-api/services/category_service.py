@@ -1,4 +1,3 @@
-"""Regra de negócio de categorias."""
 from database import db
 from models.category import Category
 from models.task import Task

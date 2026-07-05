@@ -1,10 +1,3 @@
-"""Model de Usuário + hashing seguro de senha.
-
-- SQL parametrizado (finding C2).
-- Hash de senha com PBKDF2 + salt da stdlib (finding C5 — substitui senha em
-  texto puro). Evita dependência externa para não quebrar a validação.
-- `to_public_dict` nunca expõe a senha (finding H5 — vazamento de dado sensível).
-"""
 import hashlib
 import os
 
@@ -30,7 +23,6 @@ def verificar_senha(senha, armazenada):
 
 
 def _to_public_dict(row):
-    # Omite deliberadamente o campo `senha`.
     return {
         "id": row["id"],
         "nome": row["nome"],

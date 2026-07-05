@@ -1,8 +1,3 @@
-"""Regra de negócio de pedidos (finding H1 — tirada do controller).
-
-Valida estoque, calcula o total e orquestra a criação transacional via model.
-Não conhece HTTP: sinaliza erros de domínio com DomainError.
-"""
 from src.middlewares.error_handler import DomainError
 
 

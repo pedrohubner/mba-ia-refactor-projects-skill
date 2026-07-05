@@ -1,7 +1,3 @@
-"""Controller de Produto — fino: valida entrada, chama o model, monta resposta.
-
-Sem SQL, sem try/except repetido (o error handler central cuida das exceções).
-"""
 from flask import jsonify, request
 
 from src.config.settings import settings

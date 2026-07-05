@@ -36,5 +36,4 @@ class Task(db.Model):
         }
 
     def is_overdue(self):
-        # Delega ao helper compartilhado (finding M3 — lógica antes duplicada).
         return is_overdue(self)

@@ -1,4 +1,3 @@
-// Model de curso.
 class CourseModel {
     constructor(conn) {
         this.conn = conn;

@@ -1,9 +1,3 @@
-"""Relatórios (findings H1/M1).
-
-O relatório de resumo original fazia uma query de tasks por usuário dentro de um
-loop (N+1). Aqui as tasks são carregadas uma única vez e agregadas em memória
-(playbook P7). Datas via `now_utc()` (sem `utcnow()` deprecated).
-"""
 from datetime import timedelta
 
 from database import db

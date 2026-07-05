@@ -1,4 +1,3 @@
-// Model de usuário — acesso a dados, sem regra de negócio nem HTTP.
 class UserModel {
     constructor(conn) {
         this.conn = conn;

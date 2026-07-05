@@ -1,8 +1,3 @@
-"""Serviço de notificação.
-
-Credenciais de SMTP agora vêm de variáveis de ambiente (finding C1 — a senha
-'senha123' estava hardcoded). Logging estruturado no lugar de `print` (L2).
-"""
 import logging
 import os
 import smtplib

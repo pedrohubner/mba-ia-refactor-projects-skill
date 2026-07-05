@@ -1,8 +1,3 @@
-"""Composition root / entry point (application factory).
-
-Lê a config de env (sem segredos hardcoded), inicializa o db, registra os
-blueprints (View) e o error handler central, e expõe `create_app()`.
-"""
 import logging
 
 from flask import Flask
@@ -43,8 +38,7 @@ def create_app():
     register_error_handlers(app)
 
     with app.app_context():
-        # Garante que os models estão importados antes do create_all.
-        from models import task, user, category  # noqa: F401
+        from models import task, user, category
         db.create_all()
 
     return app

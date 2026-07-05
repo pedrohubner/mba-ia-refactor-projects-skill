@@ -1,4 +1,3 @@
-"""Controller de tasks — traduz HTTP ↔ service. Sem regra de negócio nem SQL."""
 from flask import request, jsonify
 
 from services import task_service

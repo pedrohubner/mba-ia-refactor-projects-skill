@@ -1,7 +1,3 @@
-"""Entry point — delega ao composition root em src/app.py.
-
-Mantém o comando original de execução: `python app.py`.
-"""
 from src.app import create_app
 from src.config.settings import settings
 

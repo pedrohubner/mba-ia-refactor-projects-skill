@@ -1,10 +1,3 @@
-"""Model de Produto — encapsula acesso a dados, sem conhecer HTTP.
-
-Todas as queries são parametrizadas (finding C2 — SQL Injection corrigido).
-A conexão é injetada no construtor (findings H2/H3).
-"""
-
-
 def _row_to_dict(row):
     return {
         "id": row["id"],
@@ -60,7 +53,6 @@ class ProdutoModel:
         return True
 
     def search(self, termo=None, categoria=None, preco_min=None, preco_max=None):
-        # Cláusulas dinâmicas com placeholders (P2) — sem concatenar input.
         clauses, params = ["1=1"], []
         if termo:
             clauses.append("(nome LIKE ? OR descricao LIKE ?)")

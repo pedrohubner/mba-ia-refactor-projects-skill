@@ -1,23 +1,13 @@
-"""Model de Pedido — acesso a dados de pedidos e itens.
-
-- SQL parametrizado (C2).
-- N+1 resolvido: os itens de vários pedidos são carregados com um único JOIN
-  (finding M1 / playbook P7), em vez de uma query por item dentro de loops.
-"""
-
-
 class PedidoModel:
     def __init__(self, db):
         self.db = db
 
-    # --- leitura de produtos usada pela regra de criação de pedido ---
     def get_produto(self, produto_id):
         cur = self.db.cursor()
         cur.execute("SELECT * FROM produtos WHERE id = ?", (produto_id,))
         return cur.fetchone()
 
     def _itens_por_pedidos(self, pedido_ids):
-        """Carrega os itens de todos os pedidos de uma vez (evita N+1)."""
         if not pedido_ids:
             return {}
         placeholders = ",".join("?" * len(pedido_ids))
@@ -72,7 +62,6 @@ class PedidoModel:
         return self._montar_pedidos(cur.fetchall())
 
     def create(self, usuario_id, total, itens_calculados):
-        """Cria pedido + itens e baixa estoque numa única transação (M5)."""
         cur = self.db.cursor()
         cur.execute(
             "INSERT INTO pedidos (usuario_id, status, total) VALUES (?, 'pendente', ?)",
@@ -100,7 +89,6 @@ class PedidoModel:
         self.db.commit()
         return True
 
-    # --- agregações para o relatório (mantém a query no model) ---
     def contar_por_status(self, status):
         cur = self.db.cursor()
         cur.execute("SELECT COUNT(*) FROM pedidos WHERE status = ?", (status,))

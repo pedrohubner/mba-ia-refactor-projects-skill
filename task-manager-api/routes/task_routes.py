@@ -1,4 +1,3 @@
-"""View/Routes de tasks — só mapeia URL+método → controller (sem lógica)."""
 from flask import Blueprint
 
 from controllers import task_controller

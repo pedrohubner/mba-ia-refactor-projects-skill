@@ -1,5 +1,3 @@
-// Hash de senha seguro com scrypt + salt (stdlib `crypto`), playbook P9.
-// Substitui o `badCrypto` caseiro e inseguro (finding C5) de utils.js.
 const crypto = require('crypto');
 
 function hashPassword(plain) {

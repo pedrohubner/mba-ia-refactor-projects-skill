@@ -1,5 +1,3 @@
-// Regra de negócio do checkout (finding H1 — tirada da rota) escrita com
-// async/await, eliminando a pirâmide de callbacks (finding H4 / playbook P10).
 const { HttpError } = require('../middlewares/errorHandler');
 const { hashPassword } = require('./passwordService');
 
@@ -21,7 +19,6 @@ class CheckoutService {
         const course = await this.courseModel.findActiveById(courseId);
         if (!course) throw new HttpError(404, 'Curso não encontrado');
 
-        // Cria o usuário se ainda não existir (senha com hash seguro).
         let user = await this.userModel.findByEmail(email);
         const userId = user
             ? user.id

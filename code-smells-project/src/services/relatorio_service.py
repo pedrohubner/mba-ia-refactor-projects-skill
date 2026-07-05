@@ -1,10 +1,3 @@
-"""Regra de negócio do relatório de vendas (finding H1/L1).
-
-A lógica de faixas de desconto sai do model/controller e vira regra explícita,
-sem magic numbers soltos.
-"""
-
-# Faixas de desconto: (faturamento_minimo, taxa) — elimina magic numbers (L1).
 DESCONTO_FAIXAS = [
     (10000, 0.10),
     (5000, 0.05),

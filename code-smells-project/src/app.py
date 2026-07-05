@@ -1,8 +1,3 @@
-"""Composition root — cria o app, lê config, liga as camadas e registra rotas.
-
-É o único lugar que "sabe" como tudo se conecta: instancia os models com a
-conexão, injeta nos services e controllers, e registra rotas + error handler.
-"""
 import logging
 
 from flask import Flask
@@ -32,20 +27,16 @@ def create_app():
     app.config["DEBUG"] = settings.DEBUG
     CORS(app)
 
-    # Infra
     db = create_connection(settings.DB_PATH)
 
-    # Models (recebem a conexão — injeção de dependência)
     produto_model = ProdutoModel(db)
     usuario_model = UsuarioModel(db)
     pedido_model = PedidoModel(db)
 
-    # Services
     notification = NotificationService()
     pedido_service = PedidoService(pedido_model, notification)
     relatorio_service = RelatorioService(pedido_model)
 
-    # Controllers (recebem models/services)
     controllers = {
         "produto": ProdutoController(produto_model),
         "usuario": UsuarioController(usuario_model),

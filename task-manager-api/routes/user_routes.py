@@ -1,4 +1,3 @@
-"""View/Routes de usuários — delega ao controller."""
 from flask import Blueprint
 
 from controllers import user_controller

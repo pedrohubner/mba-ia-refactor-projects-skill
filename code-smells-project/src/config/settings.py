@@ -1,8 +1,3 @@
-"""Configuração central da aplicação.
-
-Todos os segredos e flags vêm de variáveis de ambiente (P1 do playbook),
-eliminando credenciais hardcoded (finding C1) e DEBUG fixo (finding L5).
-"""
 import os
 
 
@@ -13,7 +8,6 @@ class Settings:
     HOST = os.environ.get("HOST", "0.0.0.0")
     PORT = int(os.environ.get("PORT", "5000"))
 
-    # Constantes de domínio centralizadas (elimina magic strings/numbers - L1)
     CATEGORIAS_VALIDAS = [
         "informatica", "moveis", "vestuario", "geral", "eletronicos", "livros",
     ]

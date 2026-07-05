@@ -1,4 +1,3 @@
-// Controller de usuário.
 class UserController {
     constructor(userService) {
         this.userService = userService;

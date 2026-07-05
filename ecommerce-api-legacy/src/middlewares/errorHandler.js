@@ -1,5 +1,3 @@
-// Tratamento de erro centralizado (finding M4 / playbook P5).
-// Substitui os erros engolidos e os `res.status(500)` repetidos em cada callback.
 const logger = require('./logger');
 
 class HttpError extends Error {
